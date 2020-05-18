@@ -1,6 +1,6 @@
 package movie
 
-import "errors"
+import "fmt"
 
 const (
 	MinTitleLength = 1
@@ -26,7 +26,7 @@ func NewTitle(value string) (*Title, error) {
 		len(value) > MaxTitleLength,
 	} {
 		if unsatisfied {
-			return nil, errors.New(
+			return nil, fmt.Errorf(
 				"title must be between %d and %d",
 				MinTitleLength,
 				MaxTitleLength,

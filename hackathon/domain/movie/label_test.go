@@ -17,7 +17,7 @@ var _ = Describe("NewLabel", func() {
 	Context("with empty Label", func() {
 		It("fails to create Label and returns error", func() {
 			labelValue := ""
-			label, err := movie.NewLabel(idValue)
+			label, err := movie.NewLabel(labelValue)
 			Expect(label).To(BeNil())
 			Expect(err).NotTo(BeNil())
 		})
@@ -35,7 +35,7 @@ var _ = Describe("NewLabel", func() {
 		It("fails to create Label and returns error", func() {
 			labelValue := "l"
 			label, err := movie.NewLabel(labelValue)
-			Expect(id).To(BeNil())
+			Expect(label).To(BeNil())
 			Expect(err).NotTo(BeNil())
 		})
 	})
@@ -43,7 +43,7 @@ var _ = Describe("NewLabel", func() {
 		It("fails to create Label and returns error", func() {
 			labelValue := "label-label-label-label"
 			label, err := movie.NewLabel(labelValue)
-			Expect(id).To(BeNil())
+			Expect(label).To(BeNil())
 			Expect(err).NotTo(BeNil())
 		})
 	})

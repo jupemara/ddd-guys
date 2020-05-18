@@ -1,6 +1,6 @@
 package movie
 
-import "errors"
+import "fmt"
 
 const (
 	MinLabelLength = 2
@@ -26,7 +26,7 @@ func NewLabel(value string) (*Label, error) {
 		len(value) > MaxLabelLength,
 	} {
 		if unsatisfied {
-			return nil, errors.New(
+			return nil, fmt.Errorf(
 				"label must be between %d and %d",
 				MinLabelLength,
 				MaxLabelLength,
