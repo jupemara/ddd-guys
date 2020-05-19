@@ -36,7 +36,7 @@ class Title {
 }
 
 note bottom of Title
-    It must be between 1 and 255 characters.
+    It must be between 1 and 100 characters.
 end note
 
 class Length {
@@ -56,7 +56,7 @@ class Label {
 }
 
 note bottom of Label
-    Value must be between 1 and 300.
+    Value must be between 2 and 16.
 end note
 
 class PublishPeriod {
