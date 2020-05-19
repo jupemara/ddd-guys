@@ -15,6 +15,14 @@ type Movie struct {
 
 // TODO: Length
 
+func (m Movie) Title() string {
+	return m.title.Value()
+}
+
+func (m Movie) Labels() []Label {
+	return m.labels
+}
+
 func (m Movie) Length() Length {
 	return m.length
 }

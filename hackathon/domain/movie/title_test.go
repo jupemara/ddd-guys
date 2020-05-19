@@ -35,7 +35,7 @@ var _ = Describe("NewTitle", func() {
 	// MaxTitleLength+1 strings for test
 	var longTitle string
 	for i := 0; i <= movie.MaxTitleLength; i++ {
-		longStrings = longTitle + "A"
+		longTitle = longTitle + "A"
 	}
 
 	Context("with a title longer than the criteria", func() {

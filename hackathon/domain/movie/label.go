@@ -7,10 +7,6 @@ const (
 	MaxLabelLength = 16
 )
 
-func (m Movie) Labels() []Label {
-	return m.labels
-}
-
 type Label struct {
 	value string
 }

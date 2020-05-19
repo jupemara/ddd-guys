@@ -7,10 +7,6 @@ const (
 	MaxTitleLength = 100
 )
 
-func (m Movie) Title() string {
-	return m.title.Value()
-}
-
 type Title struct {
 	value string
 }
