@@ -1,6 +1,8 @@
 package publish_period
 
-import "errors"
+import (
+	"errors"
+)
 
 type PublishPeriod struct {
 	contentsProvider ContentsProvider
@@ -41,6 +43,9 @@ func newPublishPeriodWithStartAndEndDate(cp ContentsProvider, startDate string, 
 }
 
 func newPublishPeriodWithStartDateOnly(cp ContentsProvider, startDate string, endDate string) (*PublishPeriod, error) {
+	if len(endDate) > 0 {
+		return nil, errors.New("assertion error")
+	}
 	start, err := newStartDate(startDate)
 	if err != nil {
 		return nil, err
@@ -49,6 +54,9 @@ func newPublishPeriodWithStartDateOnly(cp ContentsProvider, startDate string, en
 }
 
 func newPublishPeriodWithEndDateOnly(cp ContentsProvider, startDate string, endDate string) (*PublishPeriod, error) {
+	if len(startDate) > 0 {
+		return nil, errors.New("assertion error")
+	}
 	end, err := newEndDate(endDate)
 	if err != nil {
 		return nil, err
@@ -57,5 +65,8 @@ func newPublishPeriodWithEndDateOnly(cp ContentsProvider, startDate string, endD
 }
 
 func newPublishPeriodWithoutDate(cp ContentsProvider, startDate string, endDate string) (*PublishPeriod, error) {
+	if len(startDate) > 0 || len(endDate) > 0 {
+		return nil, errors.New("assertion error")
+	}
 	return &PublishPeriod{contentsProvider: cp, startDate: nil, endDate: nil}, nil
 }

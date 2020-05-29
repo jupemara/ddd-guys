@@ -32,6 +32,25 @@ var _ = Describe("NewPublishPeriod", func() {
 			Expect(err).To(BeNil())
 		})
 	})
+	Context("with invalid startDate and invalid endDate", func() {
+		It("fails to create PublishPeriod with error", func() {
+			start := "xxxxxxxxxxxx"
+			end := "yyyyyyyyyyy"
+			pp, err := publish_period.NewPublishPeriod(*contentsProvider, start, end)
+			Expect(pp).To(BeNil())
+			Expect(err).NotTo(BeNil())
+		})
+	})
+	Context("with empty startDate and empty endDate", func() {
+		It("creates PublishPeriod without error", func() {
+			start := ""
+			end := ""
+			pp, err := publish_period.NewPublishPeriod(*contentsProvider, start, end)
+			Expect(pp).NotTo(BeNil())
+			Expect(err).To(BeNil())
+		})
+	})
+
 	Context("with valid startDate, endDate and endDate is before startDate", func() {
 		It("fails to create PublishPeriod with error", func() {
 			start := "2020-01-01T01:00:00.00Z"
