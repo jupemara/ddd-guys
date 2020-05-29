@@ -61,12 +61,20 @@ end note
 
 class PublishPeriod {
     contentsProvider ContentsProvider
-    startDate time.Time
-    endDate time.Time
+    startDate *StartDate
+    endDate *EndDate
 }
 
 class ContentsProvider {
     value string
+}
+
+class StartDate {
+    value time.Time
+}
+
+class EndDate {
+    value time.Time
 }
 
 interface Score {
@@ -111,7 +119,9 @@ Scores o-- "0..*" Score
 Score o-- ScoreProvider
 Score <|-- AmazonScore
 Score <|-- YahooScore
-PublishPeriod o-- ContentsProvider
+PublishPeriod "0..1" o-- StartDate
+PublishPeriod "0..1" o-- EndDate
+PublishPeriod "1" o-- "1" ContentsProvider
 IIdProvider <|.. UuidIdProvider
 
 @enduml
