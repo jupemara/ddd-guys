@@ -79,7 +79,14 @@ class EndDate {
 
 interface Score {
     scoreProvider ScoreProvider
-    value int
+    value float64
+    maxvalue float64
+    turnout int
+
+    +ScoreProvider() ScoreProvider
+    +Value() float64
+    +MaxValue() float64
+    +Turnout() int
 }
 
 class AmazonScore {
