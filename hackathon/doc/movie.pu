@@ -1,0 +1,134 @@
+@startuml
+
+class Movie {
+    id Id
+    title Title
+    publishedPeriods PublishPeriod[]
+    scores Scores
+    publishDate time.Time
+    length Length
+    labels Label[]
+    status State
+
+    +new() boolean
+    +isVisible() boolean
+    +changeScore(score Score) error
+}
+
+class Scores {
+    scores Score[]
+}
+
+note left of Scores
+    ScoreProvider id must be unique.
+end note
+
+class Id {
+    value string
+}
+
+note bottom of Id
+    It must be between 6 and 32 characters.
+end note
+
+class Title {
+    value string
+}
+
+note bottom of Title
+    It must be between 1 and 100 characters.
+end note
+
+class Length {
+    value int
+    hour int
+    min int
+    sec int
+}
+
+note bottom of Length
+    Value is presented as minutes.
+    Value must be between 1 and 300.
+end note
+
+class Label {
+    value string
+}
+
+note bottom of Label
+    Value must be between 2 and 16.
+end note
+
+class PublishPeriod {
+    contentsProvider ContentsProvider
+    startDate *StartDate
+    endDate *EndDate
+}
+
+class ContentsProvider {
+    value string
+}
+
+class StartDate {
+    value time.Time
+}
+
+class EndDate {
+    value time.Time
+}
+
+interface Score {
+    scoreProvider ScoreProvider
+    value float64
+    maxvalue float64
+    turnout int
+
+    +ScoreProvider() ScoreProvider
+    +Value() float64
+    +MaxValue() float64
+    +Turnout() int
+}
+
+class AmazonScore {
+}
+
+note bottom of AmazonScore
+    Value must be between 0.1 to 5.0.
+    Original value is multiplied by 1000.
+end note
+
+class YahooScore {
+}
+
+note bottom of YahooScore
+    Value must be between 0.1 to 5.0.
+    Original value is multiplied by 1000.
+end note
+
+class ScoreProvider {
+    id int
+}
+
+interface IIdProvider {
+    NextIdentity() (*Id, error)
+}
+
+class UuidIdProvider {
+}
+
+Movie o-- Id
+Movie o-- Title
+Movie o-- Length
+Movie o-right- "0..*" PublishPeriod
+Movie o-- "0..*" Label
+Movie o-left- Scores
+Scores o-- "0..*" Score
+Score o-- ScoreProvider
+Score <|-- AmazonScore
+Score <|-- YahooScore
+PublishPeriod "0..1" o-- StartDate
+PublishPeriod "0..1" o-- EndDate
+PublishPeriod "1" o-- "1" ContentsProvider
+IIdProvider <|.. UuidIdProvider
+
+@enduml
